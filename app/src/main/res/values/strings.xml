@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Login-SignUp-Firebase</string>
+    <string name="just_image">just Image</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="just_text">Just Text</string>
+    <string name="ellipse">Ellipse</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot">Forgot</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account</string>
+</resources>
