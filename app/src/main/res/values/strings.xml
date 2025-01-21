@@ -15,4 +15,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="already_have_an_account">Already have an account</string>
     <string name="or_continue_with">Or continue with</string>
+    <string name="default_web_client_id">120038889885-b7sdbpt7h9nklqbt61uqp91inqfiba6k.apps.googleusercontent.com</string>
+    <string name="image">Image</string>
+    <string name="image1">Image01</string>
+    <string name="image2">image2</string>
+    <string name="image3">Image3</string>
 </resources>

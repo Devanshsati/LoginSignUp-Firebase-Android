@@ -11,6 +11,8 @@ import com.example.login_signup_firebase.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+//    private lateinit var googleSignInClient : GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,5 +28,9 @@ class MainActivity : AppCompatActivity() {
         binding.button2.setOnClickListener {
             startActivity(Intent(this, RegisterScreen::class.java))
         }
+
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
+//        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
     }
 }
