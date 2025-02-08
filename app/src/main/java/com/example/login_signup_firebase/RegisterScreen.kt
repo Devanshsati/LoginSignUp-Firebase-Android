@@ -38,7 +38,7 @@ class RegisterScreen : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("TAG", "createUserWithEmail:success")
-                        val user = auth.currentUser
+//                        val user = auth.currentUser
                         startActivity(Intent(this, LoginScreen::class.java))
                         finish()
                     } else {
@@ -57,11 +57,7 @@ class RegisterScreen : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         if (auth.currentUser != null) {
-            // startActivity(Intent(this, Homepage::class.java))
-            Toast.makeText(this,"Already Logged In", Toast.LENGTH_SHORT).show()
-            Log.d("TAG", "onStart: Already Logged In")
             Firebase.auth.signOut()
             Toast.makeText(this,"Logged Out", Toast.LENGTH_SHORT).show()
             Log.d("TAG", "onStart: Logged Out")

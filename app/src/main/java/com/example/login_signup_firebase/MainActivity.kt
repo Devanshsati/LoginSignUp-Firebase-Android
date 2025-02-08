@@ -8,10 +8,13 @@ import android.text.style.ForegroundColorSpan
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_signup_firebase.databinding.ActivityMainBinding
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
-//    private lateinit var googleSignInClient : GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +31,13 @@ class MainActivity : AppCompatActivity() {
         binding.button2.setOnClickListener {
             startActivity(Intent(this, RegisterScreen::class.java))
         }
+    }
 
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
-//        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
+    override fun onStart() {
+        auth = Firebase.auth
+        super.onStart()
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, HomeScreen::class.java))
+        }
     }
 }
