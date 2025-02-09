@@ -40,6 +40,20 @@ android {
             enable = true
         }
     }
+    packaging {
+        resources {
+            excludes += listOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/license.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/notice.txt",
+                "META-INF/ASL2.0"
+            )
+        }
+    }
 }
 
 dependencies {
@@ -52,8 +66,15 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(platform(libs.firebase.bom))
     implementation(libs.google.firebase.auth)
-    implementation(libs.play.services.auth)
+//    implementation(libs.androidx.credentials)
+//    implementation(libs.play.services.auth)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.play.services.fido)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation (libs.google.api.client)
 }

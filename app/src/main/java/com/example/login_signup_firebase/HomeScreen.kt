@@ -9,13 +9,18 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import androidx.credentials.CredentialManager
+
 
 class HomeScreen : AppCompatActivity() {
     private val binding: ActivityHomeScreenBinding by lazy { ActivityHomeScreenBinding.inflate(layoutInflater) }
     private lateinit var auth: FirebaseAuth
+    private lateinit var credentialManager: CredentialManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         auth = Firebase.auth
+        credentialManager = CredentialManager.create(this)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -27,8 +32,12 @@ class HomeScreen : AppCompatActivity() {
         }
 
         binding.button4.setOnClickListener {
+//            auth.signOut()
+//            startActivity(Intent(this, LoginScreen::class.java))
+//            finish()
             auth.signOut()
-            startActivity(Intent(this, LoginScreen::class.java))
+//            credentialManager.clearCredentialState()
+            startActivity(Intent(this, LoginScreen::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             finish()
         }
     }
