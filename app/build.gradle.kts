@@ -70,6 +70,7 @@ dependencies {
 //    implementation(libs.play.services.auth)
     implementation(libs.androidx.espresso.core)
     implementation(libs.play.services.fido)
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
