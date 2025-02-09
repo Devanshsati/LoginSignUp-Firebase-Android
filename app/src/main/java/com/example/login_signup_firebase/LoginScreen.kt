@@ -37,20 +37,9 @@ class LoginScreen : AppCompatActivity() {
         auth = Firebase.auth
         credentialManager = CredentialManager.create(this)
 
-        setupUI()
-        checkExistingUser()
-    }
-
-    private fun setupUI() {
         binding.button.setOnClickListener { handleEmailPasswordLogin() }
         binding.textView3.setOnClickListener { navigateToRegister() }
         binding.imageView5.setOnClickListener { initiateGoogleSignIn() }
-    }
-
-    private fun checkExistingUser() {
-        if (auth.currentUser != null) {
-            navigateToHome()
-        }
     }
 
     private fun handleEmailPasswordLogin() {
@@ -76,7 +65,7 @@ class LoginScreen : AppCompatActivity() {
         val googleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
             .setServerClientId(getString(R.string.default_web_client_id))
-            .setAutoSelectEnabled(false)
+            .setAutoSelectEnabled(true)
             .build()
 
         val request = GetCredentialRequest.Builder()
