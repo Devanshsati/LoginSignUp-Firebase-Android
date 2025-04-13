@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.androidx.espresso.core)
     implementation(libs.play.services.fido)
     implementation(libs.firebase.database)
+    implementation(libs.androidx.legacy.support.v4)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

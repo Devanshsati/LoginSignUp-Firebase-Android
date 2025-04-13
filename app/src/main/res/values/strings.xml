@@ -27,4 +27,8 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="save_notes">Save Notes</string>
+    <string name="note_display">Note Display</string>
+    <string name="x">❌</string>
+    <string name="title1">Title!</string>
+    <string name="desc">Description!</string>
 </resources>
