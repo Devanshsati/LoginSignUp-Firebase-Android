@@ -45,7 +45,6 @@ class NotesScreen : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val noteList = mutableListOf<NoteItem>()
                     noteKeyMap.clear()
-
                     for (noteSnapshot in snapshot.children) {
                         val note = noteSnapshot.getValue(NoteItem::class.java)
                         note?.let {
@@ -54,17 +53,37 @@ class NotesScreen : AppCompatActivity() {
                         }
                     }
 
-                    noteAdapter = NoteAdapter(noteList) { noteToDelete ->
-                        val noteKey = noteKeyMap[noteToDelete]
-                        noteKey?.let {
-                            notesRef.child(it).removeValue().addOnSuccessListener {
-                                noteAdapter.notes.remove(noteToDelete)
+                    noteAdapter = NoteAdapter(
+                        noteList,
+                        onDelete = { note ->
+                            val noteKey = noteKeyMap[note]
+                            noteKey?.let {
+                                databaseReference.child("USERS").child(currentUser!!.uid).child("notes").child(it).removeValue()
                                 "Note deleted".showToast()
-                            }.addOnFailureListener {
-                                "Failed to delete note".showToast()
+                            }
+                        },
+                        onUpdate = { note ->
+                            val noteKey = noteKeyMap[note]
+                            val updatedTitle = binding.editTextText.text.toString()
+                            val updatedDesc = binding.editTextText2.text.toString()
+
+                            if (updatedTitle.isBlank() || updatedDesc.isBlank()) {
+                                "Fill title & description to update".showToast()
+                                return@NoteAdapter
+                            }
+
+                            val updatedNote = NoteItem(updatedTitle, updatedDesc)
+                            noteKey?.let {
+                                databaseReference.child("USERS").child(currentUser!!.uid).child("notes").child(it)
+                                    .setValue(updatedNote)
+                                    .addOnSuccessListener {
+                                        "Note updated".showToast()
+                                        binding.editTextText.text.clear()
+                                        binding.editTextText2.text.clear()
+                                    }
                             }
                         }
-                    }
+                    )
 
                     recyclerView.adapter = noteAdapter
                 }
@@ -75,7 +94,7 @@ class NotesScreen : AppCompatActivity() {
             })
         }
 
-        binding.button6.setOnClickListener {
+        binding.imageView10.setOnClickListener {
             val title = binding.editTextText.text.toString()
             val description = binding.editTextText2.text.toString()
 

@@ -5,29 +5,34 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.login_signup_firebase.databinding.NotesRvItemBinding
 
-class NoteAdapter(val notes: MutableList<NoteItem>, private val deleteNote: (NoteItem) -> Unit) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+class NoteAdapter(
+    private val notes: List<NoteItem>,
+    private val onDelete: (NoteItem) -> Unit,
+    private val onUpdate: (NoteItem) -> Unit
+) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+
+    inner class NoteViewHolder(val binding: NotesRvItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val binding = NotesRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NoteViewHolder(binding, deleteNote)
+        return NoteViewHolder(binding)
     }
+
+    override fun getItemCount(): Int = notes.size
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = notes[position]
-        holder.bind(note)
-    }
+        holder.binding.textView8.text = note.title
+        holder.binding.textView9.text = note.description
 
-    override fun getItemCount(): Int {
-        return notes.size
-    }
+        holder.binding.imageView8.setOnClickListener {
+            onDelete(note)
+        }
 
-    class NoteViewHolder(private val binding: NotesRvItemBinding, private val deleteNote: (NoteItem) -> Unit ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(note: NoteItem){
-            binding.textView8.text = note.title
-            binding.textView9.text = note.description
-            binding.imageView8.setOnClickListener {
-                deleteNote(note)
-            }
+        holder.binding.imageView9.setOnClickListener {
+            onUpdate(note)
         }
     }
 }
+
